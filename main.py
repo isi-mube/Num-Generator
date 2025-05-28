@@ -57,7 +57,7 @@ with st.container():
     st.markdown('<div class="main">', unsafe_allow_html=True)
 
     # Generate random numbers
-    random_number = random.randint(50, 200)
+    random_number = random.randint(50, 60)
     st.write(f"El número aleatori generat és: **{random_number}**")
 
     # User input

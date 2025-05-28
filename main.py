@@ -61,8 +61,8 @@ with st.container():
     st.write(f"El número aleatori generat és: **{random_number}**")
 
     # User input
-    input_20 = st.number_input("Número +20:", min_value=0, max_value=80, step=1)
-    input_30 = st.number_input("Número +30:", min_value=0, max_value=80, step=1)
+    input_20 = st.number_input("Número +20:", min_value=20, max_value=60, step=1)
+    input_30 = st.number_input("Número +30:", min_value=30, max_value=60, step=1)
 
     # Check if the sum is correct
     if st.button("Comprova", key="check_button"):

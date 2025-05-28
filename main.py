@@ -119,4 +119,4 @@ with st.container():
 # Button to generate a new random number
 if st.button("🔁 Nou número aleatori"):
     st.session_state.random_number = random.randint(50, 60)
-    st.experimental_rerun()
+    st.rerun()

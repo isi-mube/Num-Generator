@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+from giphy_client import DefaultApi, ApiException
 
 # Streamlit app configuration
 st.set_page_config(page_title="Random Number Checker", page_icon="🔢", layout="centered")
@@ -73,3 +74,44 @@ with st.container():
             st.error(f"❌ Incorrecte! La suma és {total}, però el número generat és {random_number}.")
 
     st.markdown('</div>', unsafe_allow_html=True)
+    import streamlit.components.v1 as components
+
+    # Streamlit animation using Lottie
+    def load_lottie_animation(url):
+        components.html(
+            f"""
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+            <div id="lottie-animation" style="width: 300px; height: 300px; margin: auto;"></div>
+            <script>
+                var animation = bodymovin.loadAnimation({{
+                    container: document.getElementById('lottie-animation'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: '{url}'
+                }});
+            </script>
+            """,
+            height=300,
+        )
+
+    # Load and display a Lottie animation
+    st.markdown('<div class="header">Animació:</div>', unsafe_allow_html=True)
+    load_lottie_animation("https://assets9.lottiefiles.com/packages/lf20_5k1zqk.json")
+
+    # Random Giphy generator
+    def get_random_giphy(api_key, tag="funny"):
+        api_instance = DefaultApi()
+        try:
+            response = api_instance.gifs_random_get(api_key, tag=tag)
+            return response.data.image_url
+        except ApiException as e:
+            st.error("Error fetching Giphy: {}".format(e))
+            return None
+
+    # Display a random Giphy
+    st.markdown('<div class="header">Giphy Aleatori:</div>', unsafe_allow_html=True)
+    giphy_api_key = "YOUR_GIPHY_API_KEY"  # Replace with your Giphy API key
+    giphy_url = get_random_giphy(giphy_api_key)
+    if giphy_url:
+        st.image(giphy_url, caption="Giphy generat aleatoriament")

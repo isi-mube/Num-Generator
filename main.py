@@ -88,7 +88,10 @@ with st.container():
     st.markdown('<div class="main">', unsafe_allow_html=True)
 
     # Generate random numbers
-    random_number = random.randint(50, 60)
+    if "random_number" not in st.session_state:
+        st.session_state.random_number = random.randint(50, 60)
+
+    random_number = st.session_state.random_number
     st.write(f"El número aleatori generat és: **{random_number}**")
 
     # User input
@@ -112,3 +115,8 @@ with st.container():
         st.image(random.choice(giphy_embeds))
 
     st.markdown('</div>', unsafe_allow_html=True)
+
+# Button to generate a new random number
+if st.button("🔁 Nou número aleatori"):
+    st.session_state.random_number = random.randint(50, 60)
+    st.experimental_rerun()

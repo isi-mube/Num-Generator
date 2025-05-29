@@ -76,8 +76,8 @@ if "random_number" not in st.session_state:
 random_number = st.session_state.random_number
 st.write(f"El número aleatori generat és: **{random_number}**")
 
-input_1 = st.number_input("Número al cronòmetre +20 segons:", min_value=1, max_value=120, step=1)
-input_2 = st.number_input("Número al cronòmetre +30 segons:", min_value=1, max_value=120, step=1)
+input_1 = st.number_input("Número al cronòmetre +20 segons:", min_value=random_number + 1, max_value=1000, step=1)
+input_2 = st.number_input("Número al cronòmetre +30 segons:", min_value=random_number + 1, max_value=1000, step=1)
 
 # Comprovar valors
 if st.button("Comprova"):
